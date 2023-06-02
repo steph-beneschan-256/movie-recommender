@@ -27,52 +27,52 @@ For each questions, QUESTIONS stores the value of [DISPLAY_TEXT], which Big Five
 */
 const QUESTIONS = [
     {
-        displayText: "extraverted; enthusiastic",
+        displayText: "You see yourself as extraverted; enthusiastic.",
         trait: BIG_FIVE_TRAITS.extraversion,
         reversed: false
     },
     {
-        displayText: "critical; quarrelsome",
+        displayText: "You see yourself as critical; quarrelsome.",
         trait: BIG_FIVE_TRAITS.agreeableness,
         reversed: true
     },
     {
-        displayText: "dependable; self-disciplined",
+        displayText: "You see yourself as dependable; self-disciplined.",
         trait: BIG_FIVE_TRAITS.conscientiousness,
         reversed: false
     },
     {
-        displayText: "anxious; easily upset",
+        displayText: "You see yourself as anxious; easily upset.",
         trait: BIG_FIVE_TRAITS.emotionalStability,
         reversed: true
     },
     {
-        displayText: "open to new experiences; complex",
+        displayText: "You see yourself as open to new experiences; complex.",
         trait: BIG_FIVE_TRAITS.opennessToExperiences,
         reversed: false
     },
     {
-        displayText: "reserved; quiet",
+        displayText: "You see yourself as reserved; quiet.",
         trait: BIG_FIVE_TRAITS.extraversion,
         reversed: true
     },
     {
-        displayText: "sympathetic; warm",
+        displayText: "You see yourself as sympathetic; warm.",
         trait: BIG_FIVE_TRAITS.agreeableness,
         reversed: false
     },
     {
-        displayText: "disorganized; careless",
+        displayText: "You see yourself as disorganized; careless.",
         trait: BIG_FIVE_TRAITS.conscientiousness,
         reversed: true
     },
     {
-        displayText: "calm; emotionally stable",
+        displayText: "You see yourself as calm; emotionally stable.",
         trait: BIG_FIVE_TRAITS.emotionalStability,
         reversed: false
     },
     {
-        displayText: "conventional; uncreative",
+        displayText: "You see yourself as conventional; uncreative.",
         trait: BIG_FIVE_TRAITS.opennessToExperiences,
         reversed: true
     }
@@ -148,35 +148,53 @@ export default function TIPIForm({onFinished}) {
 
     return(
         <div className="TIPIForm">
-            <h4>
+            <p>
                 Please indicate how much you agree with the following statement:
-            </h4>
+            </p>
+            <img src={QUESTIONS[questionIndex].img ? QUESTIONS[questionIndex].img : ""} alt="" />
             <h3>
-                You see yourself as {QUESTIONS[questionIndex].displayText}.
+                {QUESTIONS[questionIndex].displayText}
             </h3>
-            <div>
-                <label>
+            <div className="agreementSliderContainer">
+                    <span>Disagree</span>
+
                     <input type="range" min="1" max={(2*DEGREES_OF_AGREEMENT+1).toString()}
                     value={selectedValue}
-                    onChange={(e) => setSelectedValue(e.target.value)}/>
+                    onChange={(e) => setSelectedValue(e.target.value)}
+                    className="agreementSlider"/>
 
-                    <h4>
-                        {selectedValue} 
-                    </h4>
-                    <h3>
-                        {DEGREE_LABELS[selectedValue-1]}
-                    </h3>
-                </label>
+                    <span>Agree</span>
             </div>
+            <p>
+                <b>{DEGREE_LABELS[selectedValue-1]}</b>
+            </p>
 
             <button onClick={prevQuestion}
             disabled={questionIndex <= 0}>
+                <img src="images/prev-icon.svg" alt=""/>
+                <br/>
                 Previous Question
             </button>
 
             <button onClick={nextQuestion}>
+                <img src="images/next-icon.svg" alt=""/>
+                <br/>
                 {(questionIndex < QUESTIONS.length - 1) ? "Next Question": "Finish Quiz"}
             </button>
+
+            <div className="progressBar">
+                {
+                    QUESTIONS.map((question, index) => {
+                        const questionDone = userAnswers.length > index;
+
+                        return (
+                        <div className={`progressBit ${questionDone ? "done" : "notDone"}`} >
+                            Q{index+1}<br/>{questionDone ? "✓" : ""}
+                        </div>
+                        );
+                    })
+                }
+            </div>
         </div>
     )
 

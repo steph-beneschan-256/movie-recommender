@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.App-header {
+.App-header h1 {
   background-color: #282c34;
   text-align: center;
   font-size: calc(10px + 2vmin);
@@ -20,12 +20,99 @@
 /*-------------------------*/
 
 .TIPIForm {
+  margin-top: 10vw;
+  margin-bottom: 10vw;
 
+}
+
+.TIPIForm img {
+  max-width: 200px;
+}
+
+.agreementSliderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.agreementSliderContainer span {
+  display: inline-block;
+  font-size: 1rem;
+  min-height: 1vw;
+
+  text-align: center;
+}
+.agreementSlider {
+  display: inline-block;
+  width: 78%;
+  max-width: 800px;
+  margin-left: 1%;
+  margin-right: 1%;
+  min-height: 1vw;
 }
 
 .TIPIForm button {
   width: 48%;
   margin: 1%;
+  font-size: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem; 
+
+  background-color: rgb(0, 57, 131);
+  color: white;
+  border-radius: 1rem;
+  border: none;
+  
+  transition: background-color 0.25s;
+}
+
+.TIPIForm button:hover {
+  cursor: pointer;
+  background-color: rgb(29, 80, 148);
+}
+
+.TIPIForm button:disabled {
+  cursor: not-allowed;
+  background-color: rgb(179, 179, 179);
+  color: lightgray;
+}
+
+.TIPIForm button img {
+  min-width: 20px;
+  width: 1vw;
+}
+
+.progressBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.progressBit {
+  display: inline-block;
+  width: 100%;
+  height: 2.5rem;
+  line-height: 1.25rem;
+  margin: 1%;
+  transition: background-color 0.3s;
+  color: #00000088;
+}
+
+.progressBar .done {
+  background-color: #5ed7ff;
+
+}
+
+.progressBar .notDone {
+  background-color: lightgray;
+}
+
+.prev-button {
+  width: 1vw;
+}
+.next-button {
+  width: 1vw;
 }
 
 .question h3 {
@@ -40,6 +127,15 @@
   display: block;
 }
 
+.recommendationsContainer {
+  display: flex;
+  align-items: start;
+  width: 100%;
+}
+
+.recommendationsContainer h2 {
+  width: 100%;
+}
 
 .filmRecommendation {
   width: 20%;
@@ -60,4 +156,8 @@
   object-fit: fill;
   background-color: #222222;
   box-shadow: 0px 10px 15px #00000088
+}
+
+.filmRecommendation a {
+  overflow: wrap;
 }

@@ -159,6 +159,14 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Movie Recommender</h1>
+        <h4>
+        {/* Inclusion of the following disclaimer is mandated by the TMDB API terms of service:
+        https://www.themoviedb.org/documentation/api/terms-of-use */}
+        Disclaimer:
+        This product uses the TMDB API but is not endorsed or certified by TMDB.
+        (See below to learn more)
+        </h4>
+        <div className="divider"/>
       </header>
       <body>
         {
@@ -171,7 +179,7 @@ function App() {
           : (
             <div>
               <p>
-                Take a brief quiz to describe your personality, and we'll predict which film genres you enjoy most. We will then show popular films in those genres.
+                Take a brief quiz to describe your personality, and we'll predict which film genres you enjoy most. Then, we will show you the most popular films in those genres.
               </p>
               <button onClick={startQuiz}>Start Quiz</button>
             </div>
@@ -179,13 +187,7 @@ function App() {
         }
 
         <div className="divider"/>        
-        <h3>
-        {/* Inclusion of the following disclaimer is mandated by the TMDB API terms of service:
-        https://www.themoviedb.org/documentation/api/terms-of-use */}
-        This product uses the TMDB API but is not endorsed or certified by TMDB.
-        <br/>
-        (See below to learn more)
-        </h3>
+
 
         <div className="divider"/> 
         <h2>Acknowledgements</h2>
