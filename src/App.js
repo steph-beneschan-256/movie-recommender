@@ -76,10 +76,12 @@ function App() {
   const [quizDone, setQuizDone] = useState(false);
 
   const [recommendations, setRecommendations] = useState([]);
+  const [loadingRecommendations, setLoadingRecommendations] = useState(false);
   const [baseImgURL, setBaseImgURL] = useState("");
 
   // Get recommendations from the TMDB API, based on genre aj;sdfojaogj
   async function getRecommendations(genres) {
+    setLoadingRecommendations(true);
   
     // request syntax and example req. from here: https://developer.themoviedb.org/reference/discover-movie
 
@@ -112,6 +114,7 @@ function App() {
     const jsonData = await response.json();
     // get the top 5 results (note: if results.length < 5, results.slice(0,5) returns the entire array without issue)
     setRecommendations(jsonData.results.slice(0,5));
+    setLoadingRecommendations(false);
 
     updateBaseImgPath();
   }
@@ -166,30 +169,29 @@ function App() {
         This product uses the TMDB API but is not endorsed or certified by TMDB.
         (See below to learn more)
         </h4>
-        <div className="divider"/>
       </header>
       <body>
-        {
-          (quizInProgress) ? (
-            <TIPIForm questions={defaultQuestions} onFinished={onScoresCalculated} />
-          )
-          : (quizDone) ? (
-            <Recommendations imgBasePath={baseImgURL} films={recommendations}/>
-          )
-          : (
-            <div>
-              <p>
-                Take a brief quiz to describe your personality, and we'll predict which film genres you enjoy most. Then, we will show you the most popular films in those genres.
-              </p>
-              <button onClick={startQuiz}>Start Quiz</button>
-            </div>
-          )
-        }
+        <div className="bodyInner">
+          {
+            (quizInProgress) ? (
+              <TIPIForm questions={defaultQuestions} onFinished={onScoresCalculated} />
+            )
+            : (quizDone) ? (
+              <Recommendations loading={loadingRecommendations} imgBasePath={baseImgURL} films={recommendations}/>
+            )
+            : (
+              <div>
+                <p>
+                  Take a brief quiz to describe your personality, and we'll predict which film genres you enjoy most. Then, we will show you the most popular films in those genres.
+                </p>
+                <button onClick={startQuiz}>Start Quiz</button>
+              </div>
+            )
+          }
+        </div>
 
-        <div className="divider"/>        
-
-
-        <div className="divider"/> 
+      </body>
+      <footer>
         <h2>Acknowledgements</h2>
         <ul style={{textAlign: "left"}}>
           <li>
@@ -208,12 +210,11 @@ function App() {
           </li>
           <li>
             <p>
-              Information on specific films comes from The Movie Database
+              Information on recommended films comes from The Movie Database (TMDB) API
             </p>
           </li>
         </ul>
-
-      </body>
+      </footer>
     </div>
   );
 }
