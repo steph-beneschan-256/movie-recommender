@@ -24,55 +24,66 @@ const DEGREE_LABELS = [
 For each question, the user will be shown a statement of this form:
 "You see yourself as [DISPLAY_TEXT]."
 For each questions, QUESTIONS stores the value of [DISPLAY_TEXT], which Big Five personality trait this particular question measures, and the scale is reversed (i.e. whether a higher number on the scale indicates a greater or lesser expression of the trait).
+
 */
 const QUESTIONS = [
     {
-        displayText: "You see yourself as extraverted; enthusiastic.",
+        displayText: "You're not afraid of making new friends.",
+        altDisplayText: "You see yourself as extraverted; enthusiastic.",
         trait: BIG_FIVE_TRAITS.extraversion,
         reversed: false
     },
     {
-        displayText: "You see yourself as critical; quarrelsome.",
+        displayText: "You tell people off when they're talking in the movie theater.",
+        altDisplayText: "You see yourself as critical; quarrelsome.",
         trait: BIG_FIVE_TRAITS.agreeableness,
         reversed: true
     },
     {
-        displayText: "You see yourself as dependable; self-disciplined.",
+        displayText: "If you can't do something right, you'd rather not do it at all.",
+        altDisplayText: "You see yourself as dependable; self-disciplined.",
         trait: BIG_FIVE_TRAITS.conscientiousness,
         reversed: false
     },
     {
-        displayText: "You see yourself as anxious; easily upset.",
+        displayText: "Watching a movie can affect how you feel for the rest of the day.",
+        altDisplayText: "You see yourself as anxious; easily upset.",
         trait: BIG_FIVE_TRAITS.emotionalStability,
         reversed: true
     },
     {
         displayText: "You see yourself as open to new experiences; complex.",
+        altDisplayText: "You see yourself as open to new experiences; complex",
         trait: BIG_FIVE_TRAITS.opennessToExperiences,
         reversed: false
     },
     {
-        displayText: "You see yourself as reserved; quiet.",
+        displayText: "You would rather be a rich actor than a famous actor.",
+        altDisplayText: "You see yourself as reserved; quiet.",
         trait: BIG_FIVE_TRAITS.extraversion,
         reversed: true
     },
     {
-        displayText: "You see yourself as sympathetic; warm.",
+        displayText: "You often feel bad for the characters in a film when something goes wrong for them.",
+        altDisplayText: "You see yourself as sympathetic; warm.",
         trait: BIG_FIVE_TRAITS.agreeableness,
         reversed: false
     },
     {
-        displayText: "You see yourself as disorganized; careless.",
+        displayText: "You don't like being held to a strict schedule.",
+        altDisplayText: "You see yourself as disorganized; careless.",
         trait: BIG_FIVE_TRAITS.conscientiousness,
         reversed: true
     },
     {
-        displayText: "You see yourself as calm; emotionally stable.",
+        displayText: "You're in control of your own emotions.",
+        altDisplayText: "You see yourself as calm; emotionally stable.",
         trait: BIG_FIVE_TRAITS.emotionalStability,
         reversed: false
     },
     {
-        displayText: "You see yourself as conventional; uncreative.",
+        displayText: "If you were adapting a book into a film, you would stay as close to the source material as possible.",
+        altDisplayText: "You see yourself as conventional; uncreative.",
         trait: BIG_FIVE_TRAITS.opennessToExperiences,
         reversed: true
     }

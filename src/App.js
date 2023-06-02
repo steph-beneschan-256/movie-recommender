@@ -6,42 +6,6 @@ import Recommendations from './Recommendations';
 import TIPIForm from './TIPIForm';
 import getPreferredGenres from './getGenreRanking';
 
-const defaultQuestions = [
-    {
-      questionText: "Please select a letter:",
-      choices: [
-        {
-          "text": "Choice A",
-          "value": "A"
-        },
-        {
-          "text": "Choice B",
-          "value": "B"
-        },
-        {
-          "text": "Choice C",
-          "value": "C"
-        }
-      ]
-    },
-    {
-      questionText: "Please select a number:",
-      choices: [
-        {
-          "text": "Choice 1",
-          "value": "1"
-        },
-        {
-          "text": "Choice 2",
-          "value": "2"
-        },
-        {
-          "text": "Choice 3",
-          "value": "3"
-        }
-      ]
-    }
-];
 
 // Genres recognized by the TMDB API, and their respective TMDB IDs
 
@@ -67,8 +31,14 @@ const GENRE_IDs = {
   "tv movie": 10770
 };
 
-const apiKeys = require("./api-keys.json");
-
+// due to time constraints, include API keys directly
+//const apiKeys = require("./api-keys.json");
+const apiKeys = {
+  "TMDB": {
+      "auth": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNzY3ZTAyMmIyZmJhZGVjZGE1OTM2YTg4MGUzMTFmMyIsInN1YiI6IjY0NzY1OTk2ODlkOTdmMDBhNThlZTljNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Os5X58o7E_i-2bB5GVo8cD_aV2cNDyp8lUDyGcL6HlE",
+      "key": "3767e022b2fbadecda5936a880e311f3"
+  }
+};
 
 function App() {
 
@@ -183,7 +153,7 @@ function App() {
         <div className="bodyInner">
           {
             (quizInProgress) ? (
-              <TIPIForm questions={defaultQuestions} onFinished={onScoresCalculated} />
+              <TIPIForm onFinished={onScoresCalculated} />
             )
             : (quizDone) ? (
               <>
