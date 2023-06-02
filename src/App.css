@@ -72,6 +72,8 @@ body {
   margin-top: 10vw;
   margin-bottom: 10vw;
 
+  font-family: Verdana, Geneva, Tahoma, sans-serif
+
 }
 
 .TIPIForm img {
@@ -84,22 +86,55 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: Arial, Helvetica, sans-serif
 }
 
 .agreementSliderContainer span {
   display: inline-block;
   font-size: 1rem;
+  width: 15%;
   min-height: 1vw;
-
-  text-align: center;
 }
+
 .agreementSlider {
   display: inline-block;
-  width: 80%;
+  width: 70%;
   max-width: 800px;
   margin-left: 1%;
   margin-right: 1%;
   min-height: 1vw;
+}
+
+.speechBubble {
+ 
+  text-align: center;
+}
+.speechBubble img {
+  position: relative;
+  width: 10px;
+  bottom: 0;
+}
+.speechBubble p {
+  position: relative;
+  top: -4px;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  background-color: #ffffff;
+  border: 2px solid black;
+  border-radius: 1vw;
+  width: 40%;
+  padding: 1vw;
+
+  box-shadow: 0px 5px 10px #00000044;
+}
+
+.agreementSliderContainer + p {
+  font-family: Arial, Helvetica, sans-serif;
+
 }
 
 /* "Previous/Next Question" Buttons*/

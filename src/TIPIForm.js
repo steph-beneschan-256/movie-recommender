@@ -156,18 +156,22 @@ export default function TIPIForm({onFinished}) {
                 {QUESTIONS[questionIndex].displayText}
             </h3>
             <div className="agreementSliderContainer">
-                    <span>Disagree</span>
+                    <span style={{textAlign: "right"}}>Disagree</span>
 
                     <input type="range" min="1" max={(2*DEGREES_OF_AGREEMENT+1).toString()}
                     value={selectedValue}
                     onChange={(e) => setSelectedValue(e.target.value)}
                     className="agreementSlider"/>
 
-                    <span>Agree</span>
+                    <span style={{textAlign: "left"}}>Agree</span>
             </div>
-            <p>
-                <b>{DEGREE_LABELS[selectedValue-1]}</b>
-            </p>
+            <div className="speechBubble">
+                <img src="images/black-triangle-up.svg" alt=""/>
+                <p>
+                    <b>{DEGREE_LABELS[selectedValue-1]}</b>
+                </p>
+            </div>
+
 
             <button onClick={prevQuestion}
             disabled={questionIndex <= 0}
