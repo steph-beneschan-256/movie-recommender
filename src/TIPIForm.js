@@ -170,13 +170,15 @@ export default function TIPIForm({onFinished}) {
             </p>
 
             <button onClick={prevQuestion}
-            disabled={questionIndex <= 0}>
+            disabled={questionIndex <= 0}
+            className="primaryButton">
                 <img src="images/prev-icon.svg" alt=""/>
                 <br/>
                 Previous Question
             </button>
 
-            <button onClick={nextQuestion}>
+            <button onClick={nextQuestion}
+            className="primaryButton">
                 <img src="images/next-icon.svg" alt=""/>
                 <br/>
                 {(questionIndex < QUESTIONS.length - 1) ? "Next Question": "Finish Quiz"}

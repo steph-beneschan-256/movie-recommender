@@ -158,6 +158,11 @@ function App() {
     console.log(preferredGenres);
   }
 
+  function reset() {
+    setRecommendations([]);
+    startQuiz();
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -177,14 +182,24 @@ function App() {
               <TIPIForm questions={defaultQuestions} onFinished={onScoresCalculated} />
             )
             : (quizDone) ? (
-              <Recommendations loading={loadingRecommendations} imgBasePath={baseImgURL} films={recommendations}/>
+              <>
+
+                <Recommendations loading={loadingRecommendations} imgBasePath={baseImgURL} films={recommendations}/>
+
+                <button onClick={reset} className="primaryButton">
+                  Retake Quiz
+                </button>
+
+              </>
             )
             : (
               <div>
                 <p>
                   Take a brief quiz to describe your personality, and we'll predict which film genres you enjoy most. Then, we will show you the most popular films in those genres.
                 </p>
-                <button onClick={startQuiz}>Start Quiz</button>
+                <button onClick={startQuiz} className="primaryButton">
+                  Start Quiz
+                </button>
               </div>
             )
           }

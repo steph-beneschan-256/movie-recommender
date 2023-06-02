@@ -26,6 +26,7 @@ body {
   min-height: 50vmax;
 
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 
   padding-left: 2%;
@@ -85,24 +86,6 @@ body {
   font-size: 1rem;
   padding-top: 1rem;
   padding-bottom: 1rem; 
-
-  background-color: rgb(0, 57, 131);
-  color: white;
-  border-radius: 1rem;
-  border: none;
-  
-  transition: background-color 0.25s;
-}
-
-.TIPIForm button:hover {
-  cursor: pointer;
-  background-color: rgb(29, 80, 148);
-}
-
-.TIPIForm button:disabled {
-  cursor: not-allowed;
-  background-color: rgb(179, 179, 179);
-  color: lightgray;
 }
 
 .TIPIForm button img {
@@ -156,6 +139,11 @@ body {
  Recommendations Component       
 -------------------------*/
 
+@keyframes fade-in {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
 .recommendations {
   width: 100%;
 }
@@ -174,7 +162,6 @@ body {
   width: 20%;
   display: inline-block;
   overflow: hidden;
-  float: top;
 }
 .filmRecommendation h4 {
   overflow: scroll;
@@ -188,9 +175,41 @@ body {
   border-radius: 2.5vw;
   object-fit: fill;
   background-color: #222222;
-  box-shadow: 0px 10px 15px #00000088
+  box-shadow: 0px 10px 15px #00000088;
+
+  animation-name: fade-in;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
 }
 
 .filmRecommendation a {
   overflow: wrap;
+}
+
+/*-------------------------
+ Miscellaneous     
+-------------------------*/
+.primaryButton {
+  width: 100%;
+  font-size: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem; 
+
+  background-color: rgb(0, 57, 131);
+  color: white;
+  border-radius: 1rem;
+  border: none;
+  
+  transition: background-color 0.25s;
+}
+
+.primaryButton:hover {
+  cursor: pointer;
+  background-color: rgb(29, 80, 148);
+}
+
+.primaryButton:disabled {
+  cursor: not-allowed;
+  background-color: rgb(179, 179, 179);
+  color: lightgray;
 }
