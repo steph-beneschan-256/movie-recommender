@@ -17,11 +17,11 @@ Once the user's preferred Factor is determined, the program will search TMDB for
 (Note: Some of the TMDB-recognized film genres are not recognized in Rentfrow et al., so these genres were categorized here according to how Rentfrow et al. categorized similar genres)
 */
 const FACTOR_GENRES = {
-    communal: ["romance", "family", "drama", "music", "mystery"],
-    aesthetic: ["music", "documentary", "history"],
-    dark: ["horror"],
-    thrilling: ["action", "science fiction", "western", "war", "thriller", "crime", "mystery", "adventure", "fantasy"],
-    cerebral: ["documentary"]
+    Communal: ["romance", "family", "drama", "music", "comedy"],
+    Aesthetic: ["music", "documentary", "history"],
+    Dark: ["horror"],
+    Thrilling: ["action", "science fiction", "western", "war", "thriller", "crime", "mystery", "adventure", "fantasy"],
+    Cerebral: ["documentary"]
 
 }
 
@@ -49,7 +49,7 @@ const CORRELANTS_RENFROW = new Map([
 
 function getPreferredGenres(userPersonality) {
     let factorPoints = [0,0,0,0,0];
-    let factorNames = ["communal", "aesthetic", "dark", "thrilling", "cerebral"];
+    let factorNames = ["Communal", "Aesthetic", "Dark", "Thrilling", "Cerebral"];
 
     //TODO: find better way to handle looping over traits?
 
@@ -64,17 +64,16 @@ function getPreferredGenres(userPersonality) {
 
     console.log(factorPoints);
 
-    // Find the factor which the user is most likely to prefer
+    // Find the factor with the highest score, i.e. the factor which the user is most likely to prefer
     let m = 0;
     factorPoints.forEach((p, i) => {
         if(p > factorPoints[m])
             m = i;
     });
-    return FACTOR_GENRES[factorNames[m]];
-
-
-    
-    
+    return {
+        factor: factorNames[m],
+        genres: FACTOR_GENRES[factorNames[m]]
+    };
 
 }
 

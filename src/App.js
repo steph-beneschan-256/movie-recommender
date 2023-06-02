@@ -45,6 +45,7 @@ function App() {
   const [quizInProgress, setQuizInProgress] = useState(false);
   const [quizDone, setQuizDone] = useState(false);
 
+  const [preferredFilmFactor, setPreferredFilmFactor] = useState("Communal");
   const [recommendations, setRecommendations] = useState([]);
   const [loadingRecommendations, setLoadingRecommendations] = useState(false);
   const [baseImgURL, setBaseImgURL] = useState("");
@@ -122,10 +123,10 @@ function App() {
     setQuizDone(true);
     setQuizInProgress(false);
     
-    const preferredGenres = getPreferredGenres(traitScores);
-    getRecommendations(preferredGenres);
-    console.log(traitScores);
-    console.log(preferredGenres);
+    const preferenceData = getPreferredGenres(traitScores);
+    console.log(preferenceData);
+    setPreferredFilmFactor(preferenceData.factor);
+    getRecommendations(preferenceData.genres);
   }
 
   function reset() {
@@ -158,7 +159,8 @@ function App() {
             : (quizDone) ? (
               <>
 
-                <Recommendations loading={loadingRecommendations} imgBasePath={baseImgURL} films={recommendations}/>
+                <Recommendations preferredFactor={preferredFilmFactor} films={recommendations}
+                 loading={loadingRecommendations} imgBasePath={baseImgURL} />
 
                 <button onClick={reset} className="primaryButton">
                   Retake Quiz
