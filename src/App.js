@@ -166,7 +166,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Movie Recommender</h1>
+        <div>
+          <img src="images/app-icon.svg" alt=""/>
+          <h1>Movie Matchmaker</h1>
+        </div>
+        
         <h4>
         {/* Inclusion of the following disclaimer is mandated by the TMDB API terms of service:
         https://www.themoviedb.org/documentation/api/terms-of-use */}
@@ -225,7 +229,12 @@ function App() {
           </li>
           <li>
             <p>
-              Information on recommended films comes from The Movie Database (TMDB) API
+              Information on recommended films comes from the API from <span> 
+              <a href="https://www.themoviedb.org/" target='_blank' rel="noreferrer">
+                The Movie Database (TMDB)
+              </a>
+              </span>
+              
             </p>
           </li>
         </ul>

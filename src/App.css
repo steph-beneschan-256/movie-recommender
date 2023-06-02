@@ -6,11 +6,35 @@
  Header section                        
 -------------------------*/
 
-.App-header h1 {
+
+
+.App-header div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
   background-color: #282c34;
+  color: white;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.App-header img {
+  margin: 1%;
+  max-height: 100px;
+  aspect-ratio: 1;
+  display: inline-block;
+}
+
+.App-header h1 {
   text-align: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+}
+
+.App-header h4 {
+  padding-left: 1%;
+  padding-right: 1%;
 }
 
 /*-------------------------
