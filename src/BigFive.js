@@ -2,14 +2,16 @@
 Constants for the Big Five personality traits
 */
 
-const BIG_FIVE_TRAITS = {
-    extraversion: 0,
-    agreeableness: 1,
-    conscientiousness: 2,
-    emotionalStability: 3,
-    opennessToExperiences: 4,
+// Pseudo-enum
 
-    traits: [0,1,2,3,4]
+const BIG_FIVE_TRAITS = {
+    extraversion: "EXT",
+    agreeableness: "AGR",
+    conscientiousness: "CON",
+    emotionalStability: "NEU", //unsure about neuroticism v. emotional stability
+    opennessToExperiences: "OPE",
+
+    traits: ["EXT", "AGR", "CON", "NEU", "OPE"]
 };
 
 export default BIG_FIVE_TRAITS;

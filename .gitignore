@@ -22,5 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+/src/notes.txt
+
 # api keys
 /src/api-keys.json

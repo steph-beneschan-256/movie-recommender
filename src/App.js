@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Quiz from './Quiz';
 import Recommendations from './Recommendations';
 import TIPIForm from './TIPIForm';
+import getPreferredGenres from './getGenreRanking';
 
 const defaultQuestions = [
     {
@@ -66,22 +67,23 @@ const GENRE_IDs = {
   "tv movie": 10770
 };
 
+const apiKeys = require("./api-keys.json");
+
 
 function App() {
 
+  const [quizInProgress, setQuizInProgress] = useState(false);
   const [quizDone, setQuizDone] = useState(false);
 
   const [recommendations, setRecommendations] = useState([]);
+  const [baseImgURL, setBaseImgURL] = useState("");
 
   // Get recommendations from the TMDB API, based on genre aj;sdfojaogj
-  async function getRecommendations(genreID) {
-    if(GENRE_IDs[genreID]) { // Accept genre name as input
-      genreID = GENRE_IDs[genreID];
-    }
+  async function getRecommendations(genres) {
   
     // request syntax and example req. from here: https://developer.themoviedb.org/reference/discover-movie
 
-    const apiKeys = require("./api-keys.json");
+    
 
     //const requestURL = "https://cdkwmfgujumqg5lqlxojlvuqci0hzonl.lambda-url.us-east-2.on.aws";
 
@@ -91,7 +93,7 @@ function App() {
       language: "en-US",
       page: 1,
       sort_by: "popularity.desc",
-      with_genres: genreID,
+      with_genres: (genres.map((g) => GENRE_IDs[g])).join('|'),
       api_key: apiKeys.TMDB.key
     });
 
@@ -110,59 +112,105 @@ function App() {
     const jsonData = await response.json();
     // get the top 5 results (note: if results.length < 5, results.slice(0,5) returns the entire array without issue)
     setRecommendations(jsonData.results.slice(0,5));
-    // jsonData.results.slice(0,5).map((result) => {
-    //   console.log(result.id);
-    //   console.log(result.title);
-    //   console.log(result.poster_path);
-    //   console.log(result.popularity);
-    //   console.log(result.release_date);
-    //   console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-    // })
-  
-  
-    // set up loading symbol or whatever
-    fetch(requestURL).then((response) => {
-      console.log("movies or whatever");
-      response.json().then((f) => {
-        console.log(f);
-        // set state about recommended films
+
+    updateBaseImgPath();
+  }
+
+  async function updateBaseImgPath() {
+    if(baseImgURL === "") {
+      const requestURL = "https://api.themoviedb.org/3/configuration?" + new URLSearchParams({
+        api_key: apiKeys.TMDB.key
       })
-    })
-  
+
+      const requestOptions = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: apiKeys.TMDB.auth
+        }
+      };
+      fetch(requestURL, requestOptions).then((response) => {
+        response.json().then((data) => {
+          console.log(data);
+          const size_str = data.images.backdrop_sizes[0];
+          setBaseImgURL(data.images.secure_base_url + size_str);
+        })
+      })
+
+    };
+  }
+
+  function startQuiz() {
+    setQuizDone(false);
+    setQuizInProgress(true);
   }
   
   function onScoresCalculated(traitScores) {
     setQuizDone(true);
-    getRecommendations(34);
+    setQuizInProgress(false);
+    
+    const preferredGenres = getPreferredGenres(traitScores);
+    getRecommendations(preferredGenres);
     console.log(traitScores);
+    console.log(preferredGenres);
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Movie Recommender</h1>
       </header>
       <body>
         {
-          (!quizDone) ? (
+          (quizInProgress) ? (
             <TIPIForm questions={defaultQuestions} onFinished={onScoresCalculated} />
           )
+          : (quizDone) ? (
+            <Recommendations imgBasePath={baseImgURL} films={recommendations}/>
+          )
           : (
-            <Recommendations films={recommendations}/>
+            <div>
+              <p>
+                Take a brief quiz to describe your personality, and we'll predict which film genres you enjoy most. We will then show popular films in those genres.
+              </p>
+              <button onClick={startQuiz}>Start Quiz</button>
+            </div>
           )
         }
-        <button onClick={() => getRecommendations(12)}>Get Recommendations (test)</button>
+
+        <div className="divider"/>        
+        <h3>
+        {/* Inclusion of the following disclaimer is mandated by the TMDB API terms of service:
+        https://www.themoviedb.org/documentation/api/terms-of-use */}
+        This product uses the TMDB API but is not endorsed or certified by TMDB.
+        <br/>
+        (See below to learn more)
+        </h3>
+
+        <div className="divider"/> 
+        <h2>Acknowledgements</h2>
+        <ul style={{textAlign: "left"}}>
+          <li>
+            <p>
+              Personality Quiz based on the following paper:
+              <br/>
+              Gosling, S. D., Rentfrow, P. J., & Swann Jr, W. B. (2003). A very brief measure of the Big-Five personality domains. Journal of Research in personality, 37(6), 504-528.
+            </p>
+          </li>
+          <li>
+            <p>
+              Personality-to-genre mapping based on the following paper:
+              <br/>
+              Rentfrow, P. J., Goldberg, L. R., & Zilca, R. (2011). Listening, watching, and reading: The structure and correlates of entertainment preferences. Journal of personality, 79(2), 223-258.
+            </p>
+          </li>
+          <li>
+            <p>
+              Information on specific films comes from The Movie Database
+            </p>
+          </li>
+        </ul>
+
       </body>
     </div>
   );

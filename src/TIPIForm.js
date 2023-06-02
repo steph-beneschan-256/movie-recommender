@@ -101,15 +101,12 @@ export default function TIPIForm({onFinished}) {
         }
         else
             onFinished(calculateTraitScores(newUserAnswers));
-
-        console.log(newUserAnswers);
         
     }
 
     function prevQuestion() {
         if(questionIndex > 0) {
             const prevAnswer = userAnswers[userAnswers.length-1];
-            console.log(prevAnswer);
             setUserAnswers(userAnswers.slice(0,-1));
             setQuestionIndex(questionIndex - 1);
             setSelectedValue(prevAnswer); // Return slider to previous value
@@ -150,7 +147,7 @@ export default function TIPIForm({onFinished}) {
     }
 
     return(
-        <div>
+        <div className="TIPIForm">
             <h4>
                 Please indicate how much you agree with the following statement:
             </h4>
