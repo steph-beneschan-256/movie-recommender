@@ -1,0 +1,197 @@
+genres recognized by TMDB:
+
+const GENRE_IDs = {
+  "adventure": 12,
+  "fantasy": 14,
+  "animation": 16,
+  "drama": 18,
+  "horror": 27,
+  "action": 28,
+  "comedy": 35,
+  "history": 36,
+  "western": 37,
+  "thriller": 53,
+  "crime": 80,
+  "documentary": 99,
+  "science fiction": 878,
+  "mystery": 9648,
+  "music": 10402,
+  "romance": 10749,
+  "family": 10751,
+  "war": 10752,
+  "tv movie": 10770
+};  
+
+Tv movie and animation probably aren't influenced too much by personality (?), so let's ignore those.
+That leaves us with 17 different genres.
+
+We could maybe ask a series of yes/no questions where we subtly ask the user to choose one of two genres? But wouldn't that be too long?
+
+
+ sffsfdfkdojierojfjfeoirjgoeeoeorgeiojegoerjgrigjrijgeogrgrgrgijegrgij
+
+
+
+do you like surprises?
+do you like trying new things?
+something about careers???
+your ideal partner would punch a rude guy in the face??
+
+
+Do you like having your day planned, or do you just kind of like to see things spontaneously happen (?)
+
+---
+
+Two men are arguging with each other about a car accident. It's unclear who's responsible. In your ideal world, how would they settle this?
+alt.: What's the ideal way for two men to settle their differences?
+- Pistols at dawn [might suggest preference for Western genre]
+- Fight each other ?????? - [action preference?]
+- Talk to each other rationally
+- 
+
+A man at the movie theater steals another person's popcorn. What would you like to see that person do?
+- Talk to the man and sort things out
+- Punch the man, in the face [might suggest preference for action]
+
+Do you agree with the following statement? 
+"You don't fret about why things are the way that they are. They simply are, and that suffices for you."
+- Yes 
+- No (might suggest disinterest in Documentary or Mystery)
+
+"The real world is too damn boring."
+
+This whole thing feels wrong
+
+Something about 3D/blockbuster films?
+
+i hate war
+
+
+
+
+Maybe take a different direction?
+Big Five personality traits?
+
+Notes from a few research articles found online:
+https://psycnet.apa.org/record/2022-33722-001
+- Openness to Experience: preference for genres highlighting culture, complexity, and aesthetics [?]; dislike for romance and other "conventional" genres; preference for reflective and complex music (might be true of film too?) and less likely to enjoy upbeat/"conventional" music
+- Conscientousness:
+    - Increased preference for "conventional, fact-oriented media (e.g. reality television, news)"
+    - Increased preference for "books related to science, romance, and current events"
+    - Dislike "intense, edgy media (such as [...] cult, and horror films)
+
+- Openness: + Dark/Alternative + Aesthetic/Musical -Communal/Popular
+- Conscientiousness: + Communal/Popular +Thrilling/Action -Dark/Alternative -Aesthetic/Musical
+
+Dark/Alt.: "edgy, unconvential, and intense"
+Aes/Mus: "More cultured, complex, and artistic"
+Com./Pop.: "Conventional, popular, and cheerful in nature"
+Thr/Act: "More active, exciting, and adventurous."
+
+Manolika study:
+- Openness: +Nonfiction +complex +action films
+- Conscientiousness: +Informational +Light -Thrilling +Science +Romance -Suspense -Literary novels
+- practicality -> conservative preferences?
+- Agreeableness: +light +"relatively simple genres"
+- Neuroticism: +"more demanding media;" light books but not light movies
+- Machiavellianism: +thrilling +fiction +intensity/violence +graphic horror
+- Narcissism: +light
+- "It should be noted, however, that personality accounted for a relatively small proportion of the variance in both movie and reading preferences."
+- Extraversion: predicts no particular movie preference
+- Study was limited; sample incldued "young adults of similar education" and relied on self-reporting
+
+Highly relevant study:
+https://www.ihu.edu.gr/tjortjis/The%2050%2050%20Recommender%20a%20Method%20Incorporating%20Personality%20into%20Movie%20Recommender%20Systems.pdf (Nalmpantis et al.)
+
+https://www.researchgate.net/publication/283270671_Relating_Personality_Types_with_User_Preferences_Multiple_Entertainment_Domains (Cantador et al.)
+
+Procedure using results of above studies:
+- conduct personality test to assess user's big five traits
+- for each trait, find the movie genre for which the avg. trait value among fans of that genre (?) is closest to the user's trait value
+- maybe select the genre with the least variance between the user's trait value and the avg. user trait value as the user's probably preferred genre?
+
+is there anything else that we can do here?
+
+Also, how quickly can we conduct a big five personality test???
+
+if it's long, then consider a log-in feature (?)
+
+what about films with multiple genres?
+
+
+
+
+
+
+
+Which film genres are the most conventional???
+
+-------------------
+
+New approach
+
+1. Use TIPI
+2. Compare to average movie genre scores from Nalmpantis et al.
+
+- - - - - -
+
+You will be shown ten statements describing yourself. For each statement, please indicate how strongly you agree or disagree with the statement.
+
+- - -
+
+What ranges should we use?
+
+Each trait has 2 associated questions; if the scale is 1-5 (integers) for each question, then the average score for a particular trait could have 10 different values, each one differing by 0.5. This might not be precise enough to use with the data from the Cantador et al. study
+
+Update: after review, it turns out that the genre list used in Cantador et al. is missing about half of the genres recognized by the TMDB, and vice versa
+
+in tmdb but not cantador et al.:
+- fantasy
+- history
+- western
+- thriller (maybe similar to neo-noir?)
+- crime (maybe similar to neo-noir?)
+- documentary
+- mystery
+- music (see TMDB website)
+- family
+- tv movie (might want to ignore this one anyway)
+
+in cantador et al. but not in tmdb:
+- cartoon
+- cult
+- foreign
+- independent
+- neo-noir
+- parody
+- tragedy
+
+movie genre data from Cantador et al., not split by gender,:
+
+        OPE     CON     EXT     AGR     NEU
+action
+adv.
+anim.
+cart.
+com.
+cult.
+drama
+foreign
+horror
+indep.
+neo-noir
+parody
+romance
+sci-fi
+tragedy
+war
+
+11 1
+12 1.5
+13 2
+14 2.5
+15 3
+
+22 2
+23 2.5
+33 3
