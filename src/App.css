@@ -47,14 +47,7 @@ body {
 }
 
 .bodyInner {
-  min-height: 50vmax;
-
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-
-  padding-left: 2%;
-  padding-right: 2%;
+  padding: 2%;
 }
 
 .divider {
@@ -106,7 +99,6 @@ body {
 }
 
 .speechBubble {
- 
   text-align: center;
 }
 .speechBubble img {
@@ -204,16 +196,23 @@ body {
 }
 
 .recommendations {
+  display: flex;
   width: 100%;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+  align-content: center;
 }
 
 .recommendationsContainer {
   display: flex;
   align-items: start;
+  
   width: 100%;
+  max-width: 1000px;
 }
 
-.recommendationsContainer h2 {
+.recommendations h2 {
   width: 100%;
 }
 
@@ -231,7 +230,7 @@ body {
   margin: 5%;
   height: auto;
   aspect-ratio: 3/4;
-  border-radius: 2.5vw;
+  border-radius: 10px;
   object-fit: fill;
   background-color: #222222;
   box-shadow: 0px 10px 15px #00000088;
@@ -271,4 +270,8 @@ body {
   cursor: not-allowed;
   background-color: rgb(179, 179, 179);
   color: lightgray;
+}
+
+footer h2 {
+  margin-top: 3rem;
 }
